@@ -1,0 +1,14 @@
+
+task2: start.o util.o task2c.o
+	ld -m elf_i386 start.o task2c.o util.o -o task2
+task2c.o: task2c.c
+	gcc -m32 -Wall -ansi -c -nostdlib -fno-stack-protector task2c.c -o task2c.o
+
+util.o: util.c
+	gcc -m32 -Wall -ansi -c -nostdlib -fno-stack-protector util.c -o util.o
+
+start.o: start.s
+	nasm -f elf start.s -o start.o
+
+clean:
+	rm start.o util.o task2c.o task2
